@@ -4,131 +4,25 @@ import { generateColors, getChartCategories } from "../utils/helpers";
 import Buttons from "./Buttons";
 import Button from "./Button";
 import { RiLineChartLine } from "react-icons/ri";
-
-const chartdataMonths = [
-  {
-    date: "Jan 23",
-    Created: 167,
-    Accepted: 145,
-    Declined: 135,
-  },
-  {
-    date: "Feb 23",
-    Created: 125,
-    Accepted: 110,
-    Declined: 155,
-  },
-  {
-    date: "Mar 23",
-    Created: 156,
-    Accepted: 149,
-    Declined: 145,
-  },
-  {
-    date: "Apr 23",
-    Created: 165,
-    Accepted: 112,
-    Declined: 125,
-  },
-  {
-    date: "May 23",
-    Created: 153,
-    Accepted: 138,
-    Declined: 165,
-  },
-  {
-    date: "Jun 23",
-    Created: 124,
-    Accepted: 145,
-    Declined: 175,
-  },
-];
-const chartdataDays = [
-  {
-    date: "Jan 23",
-    Created: 170,
-    Accepted: 150,
-    Declined: 105,
-  },
-  {
-    date: "jan 24",
-    Created: 125,
-    Accepted: 87,
-    Declined: 155,
-  },
-  {
-    date: "jan 25",
-    Created: 156,
-    Accepted: 87,
-    Declined: 145,
-  },
-  {
-    date: "jan 26",
-    Created: 165,
-    Accepted: 112,
-    Declined: 125,
-  },
-  {
-    date: "jan 27",
-    Created: 153,
-    Accepted: 138,
-    Declined: 165,
-  },
-  {
-    date: "jan 28",
-    Created: 124,
-    Accepted: 145,
-    Declined: 175,
-  },
-];
-const chartdataYears = [
-  {
-    date: "2019",
-    Created: 167,
-    Accepted: 145,
-    Declined: 135,
-  },
-  {
-    date: "2020",
-    Created: 125,
-    Accepted: 110,
-    Declined: 155,
-  },
-  {
-    date: "2021",
-    Created: 156,
-    Accepted: 149,
-    Declined: 87,
-  },
-  {
-    date: "2022",
-    Created: 165,
-    Accepted: 112,
-    Declined: 125,
-  },
-  {
-    date: "2023",
-    Created: 153,
-    Accepted: 138,
-    Declined: 165,
-  },
-  {
-    date: "2024",
-    Created: 87,
-    Accepted: 145,
-    Declined: 175,
-  },
-];
+import { useDataAreaBarCharts } from "../services/useData";
+import Loader from "./Loader";
+import ErrorMessage from "./ErrorMessage";
 
 export function AreaChartAdmin({ route }) {
-  //in case we have real data from api
-  // const [timeType,setTimeType]=useState("days")
-  // const {dataChart}=useData(`${route}/${timeType}`)
-
   const [value, setValue] = useState(null);
-
-  const categories = getChartCategories(chartdataMonths);
+  const [timeType, setTimeType] = useState("daily");
+  const {
+    data: dataChart,
+    isLoading,
+    refetch,
+    error,
+  } = useDataAreaBarCharts(route, timeType);
+  const categories = dataChart ? getChartCategories(dataChart) : [];
   const colors = generateColors(categories.length);
+  const handleTimeTypeChange = (newTimeType) => {
+    setTimeType(newTimeType);
+    refetch();
+  };
   return (
     <>
       <div className="mb-3 flex items-center gap-3">
@@ -137,24 +31,28 @@ export function AreaChartAdmin({ route }) {
         </h3>
         <RiLineChartLine className="text-lg text-primaryColor sm:text-2xl" />
       </div>
-      <div className=" mb-4 rounded-2xl  bg-customGray p-1 sm:p-4">
-        <AreaChart
-          className="h-52 md:h-64 lg:h-80"
-          data={chartdataMonths}
-          index="date"
-          categories={categories}
-          colors={colors}
-          yAxisWidth={30}
-          showAnimation
-          animationDuration={1000}
-          onValueChange={(v) => setValue(v)}
-          connectNulls={true}
-        />
+      <div className="mb-2 flex h-56 min-w-full items-center justify-center rounded-2xl bg-customGray p-2 md:h-72 md:p-6 lg:h-96">
+        {error && <ErrorMessage />}
+        {!error && isLoading && <Loader />}
+        {!error && !isLoading && (
+          <AreaChart
+            className="h-52 md:h-64 lg:h-80"
+            data={dataChart}
+            index="date"
+            categories={categories}
+            colors={colors}
+            yAxisWidth={30}
+            showAnimation
+            animationDuration={1000}
+            onValueChange={(v) => setValue(v)}
+            connectNulls={true}
+          />
+        )}
       </div>
       <Buttons>
-        <Button>days</Button>
-        <Button>months</Button>
-        <Button>years</Button>
+        <Button onChangeTimeType={handleTimeTypeChange}>daily</Button>
+        <Button onChangeTimeType={handleTimeTypeChange}>monthly</Button>
+        <Button onChangeTimeType={handleTimeTypeChange}>yearly</Button>
       </Buttons>
     </>
   );

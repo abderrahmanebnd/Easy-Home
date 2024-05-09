@@ -9,13 +9,13 @@ export function getChartCategories(dataArray) {
   return Array.from(categories);
 }
 export function getDonutChartCategories(dataArray) {
-  const categories = dataArray.map((dataObj) => dataObj.name);
+  const categories = dataArray.map((dataObj) => dataObj._id);
 
   return categories;
 }
 
 export function generateColors(numColors) {
-  const colors = ["blue-500", "green-500", "orange-500", "violet-500"];
+  const colors = ["blue-500", "green-500", "orange-500", "violet-500","red-500","yellow-500","cyan-500","pink-500"];
   const dynamicColors = [];
 
   for (let i = 0; i < numColors; i++) {
@@ -36,7 +36,7 @@ export function formatNumber(num) {
     return `${(num / 1e3).toFixed(2)}k`;
   }
 
-  return num.toFixed(2);
+  return num?.toFixed(2);
 }
 export function getDate() {
   const currentDate = new Date();

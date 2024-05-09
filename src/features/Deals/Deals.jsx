@@ -1,46 +1,60 @@
-import { MdOutlineWorkOutline } from "react-icons/md";
+import { MdOutlinePunchClock } from "react-icons/md";
 import BarChartAdmin from "../../ui/BarChartAdmin";
 
 import DonutChartAdmin from "../../ui/DonutChartAdmin";
 import Statistic from "../../ui/Statistic";
 import Statistics from "../../ui/Statistics";
 import { LuUsers2 } from "react-icons/lu";
-import { HiArchiveBox } from "react-icons/hi2";
-import { TbChartDonut, TbMessageReport } from "react-icons/tb";
+
+import { TbChartDonut } from "react-icons/tb";
+import { useDataAreaBarCharts } from "../../services/useData";
+import Loader from "../../ui/Loader";
+import ErrorMessage from "../../ui/ErrorMessage";
+import { GrUserWorker } from "react-icons/gr";
 
 function Deals() {
+  const {
+    data: statsData,
+    isLoading,
+    error,
+  } = useDataAreaBarCharts("deals", "total");
+  const numCols = statsData ? Object.keys(statsData).length : 0;
   return (
     <div>
       <h2 className="mb-8 text-xl  font-semibold text-primaryColor sm:text-3xl">
         Deals Stats
       </h2>
 
-      <Statistics>
-        <Statistic
-          color={"blue"}
-          text={"Total of Workers"}
-          icon={<MdOutlineWorkOutline></MdOutlineWorkOutline>}
-          data={260}
-        />
-        <Statistic
-          color={"green"}
-          text={"Total of Users"}
-          icon={<LuUsers2></LuUsers2>}
-          data={300}
-        />
+      <Statistics numCols={numCols}>
+        {error && <ErrorMessage />}
+        {!error && isLoading && (
+          <div className="flex items-center justify-center">
+            <Loader />
+          </div>
+        )}
+        {!error && !isLoading && (
+          <>
+            <Statistic
+              color={"blue"}
+              text={"Total of Deals"}
+              icon={<MdOutlinePunchClock />}
+              data={statsData?.created}
+            />
+            <Statistic
+              color={"green"}
+              text={"Average Deal Per User"}
+              icon={<LuUsers2 />}
+              data={statsData?.averageDealPerUser}
+            />
 
-        <Statistic
-          color={"orange"}
-          text={"Applications"}
-          icon={<HiArchiveBox></HiArchiveBox>}
-          data={500}
-        />
-        <Statistic
-          color={"red"}
-          text={"Reports"}
-          icon={<TbMessageReport></TbMessageReport>}
-          data={22}
-        />
+            <Statistic
+              color={"orange"}
+              text={"Average Deal Per Worker"}
+              icon={<GrUserWorker />}
+              data={statsData?.averageDealPerWorker}
+            />
+          </>
+        )}
       </Statistics>
 
       <BarChartAdmin route="deals" />
@@ -51,10 +65,8 @@ function Deals() {
         </h3>
         <TbChartDonut className="text-lg text-primaryColor sm:text-2xl" />
       </div>
-      <section className=" grid grid-cols-1 gap-4 md:grid-cols-2">
-        <DonutChartAdmin type="general" route="deals" />
-        <DonutChartAdmin type="applicationPerJob" route="deals" />
-      </section>
+
+      <DonutChartAdmin type="GeneralDonutChart" route="deals" />
     </div>
   );
 }

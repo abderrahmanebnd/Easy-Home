@@ -6,6 +6,7 @@ import { generateColors, getChartCategories } from "../utils/helpers";
 import { IoBarChartOutline } from "react-icons/io5";
 import { useDataAreaBarCharts } from "../services/useData";
 import Loader from "./Loader";
+import ErrorMessage from "./ErrorMessage";
 
 function BarChartAdmin({ route }) {
   const [value, setValue] = useState(null);
@@ -14,6 +15,7 @@ function BarChartAdmin({ route }) {
     data: dataChart,
     isLoading,
     refetch,
+    error,
   } = useDataAreaBarCharts(route, timeType);
 
   const categories = dataChart ? getChartCategories(dataChart) : [];
@@ -34,8 +36,9 @@ function BarChartAdmin({ route }) {
       </div>
 
       <div className="mb-2 flex h-56 min-w-full items-center justify-center rounded-2xl bg-customGray p-2 md:h-72 md:p-6 lg:h-96">
-        {isLoading && <Loader />}
-        {!isLoading && (
+        {error && <ErrorMessage />}
+        {!error && isLoading && <Loader />}
+        {!error && !isLoading && (
           <BarChart
             className="h-52 md:h-64 lg:h-80"
             data={dataChart}

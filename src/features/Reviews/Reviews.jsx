@@ -1,44 +1,50 @@
-import { HiArchiveBox } from "react-icons/hi2";
 import { AreaChartAdmin } from "../../ui/AreaChartAdmin";
 import Statistic from "../../ui/Statistic";
 import Statistics from "../../ui/Statistics";
-import { MdOutlineWorkOutline } from "react-icons/md";
-import { LuUsers2 } from "react-icons/lu";
-import { TbChartDonut, TbMessageReport } from "react-icons/tb";
+
+import { TbChartDonut } from "react-icons/tb";
 import DonutChartAdmin from "../../ui/DonutChartAdmin";
+import { useDataAreaBarCharts } from "../../services/useData";
+import ErrorMessage from "../../ui/ErrorMessage";
+import Loader from "../../ui/Loader";
+import { AiOutlineComment } from "react-icons/ai";
+import { GrUserWorker } from "react-icons/gr";
 
 function Reviews() {
+  const {
+    data: statsData,
+    isLoading,
+    error,
+  } = useDataAreaBarCharts("reviews", "total");
+  const numCols = statsData ? Object.keys(statsData).length : 0;
   return (
     <div>
       <h2 className="mb-8 text-xl  font-semibold text-primaryColor sm:text-3xl">
         Reviews Stats
       </h2>
-      <Statistics>
-        <Statistic
-          color={"blue"}
-          text={"Total of Workers"}
-          icon={<MdOutlineWorkOutline></MdOutlineWorkOutline>}
-          data={26000}
-        />
-        <Statistic
-          color={"green"}
-          text={"Total of Users"}
-          icon={<LuUsers2></LuUsers2>}
-          data={3000}
-        />
-
-        <Statistic
-          color={"orange"}
-          text={"Applications"}
-          icon={<HiArchiveBox></HiArchiveBox>}
-          data={500}
-        />
-        <Statistic
-          color={"red"}
-          text={"Reports"}
-          icon={<TbMessageReport></TbMessageReport>}
-          data={22}
-        />
+      <Statistics numCols={numCols}>
+        {error && <ErrorMessage />}
+        {!error && isLoading && (
+          <div className="flex items-center justify-center">
+            <Loader />
+          </div>
+        )}
+        {!error && !isLoading && (
+          <>
+            <Statistic
+              color={"blue"}
+              text={"Total of Reviews"}
+              icon={<AiOutlineComment />}
+              data={statsData?.created}
+            />
+            <Statistic
+              color={"green"}
+              text={"Average Review Per Worker"}
+              icon={<GrUserWorker />}
+              data={statsData?.averageReviewPerWorker}
+            />
+          </>
+        )}
       </Statistics>
 
       <AreaChartAdmin route={"reviews"} />
@@ -51,8 +57,8 @@ function Reviews() {
       </div>
 
       <section className=" grid grid-cols-1 gap-4 md:grid-cols-2">
-        <DonutChartAdmin type="general" route="applications" />
-        <DonutChartAdmin type="applicationPerJob" route="applications" />
+        <DonutChartAdmin type="GeneralDonutChart" route="reviews" />
+        <DonutChartAdmin type="rating" route="reviews" />
       </section>
     </div>
   );

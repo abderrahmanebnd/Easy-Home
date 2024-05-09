@@ -77,7 +77,7 @@ export default {
             subtle: colors.gray[600],
             DEFAULT: colors.gray[500],
             emphasis: colors.blue[800],
-            strong: colors.gray[50],
+            strong: colors.blue[900],
             inverted: colors.gray[950],
           },
         },
