@@ -1,5 +1,5 @@
 import { DonutChart, Legend } from "@tremor/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { generateColors, getDonutChartCategories } from "../utils/helpers";
 import { useDataAreaBarCharts } from "../services/useData";
 import Loader from "./Loader";
