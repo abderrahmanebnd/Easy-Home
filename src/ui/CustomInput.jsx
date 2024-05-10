@@ -2,6 +2,7 @@ function CustomInput({ children, type, value, setValue, refType }) {
   return (
     <div className="relative my-6 ">
       <input
+        aria-live="assertive"
         type={type}
         value={value}
         ref={refType}

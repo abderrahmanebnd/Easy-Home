@@ -25,7 +25,6 @@ import Login from "./Pages/Login";
 import AuthProvider from "./context/AuthProvider";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import Unauthorized from "./ui/Unauthorized";
-import { useEffect } from "react";
 
 const queryClient = new QueryClient({
   defaultOptions: {

@@ -1,27 +1,19 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "../services/axios/axios";
 
 import CustomInput from "../ui/CustomInput";
 import { useAuth } from "../context/AuthProvider";
 import { IoIosWarning } from "react-icons/io";
 import Loader from "../ui/Loader";
 
-const LOGIN_URL = "/auth/login";
-
 function Login() {
-  const { setAuth } = useAuth();
-
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
-  const [errMsg, setErrMsg] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   const emailRef = useRef();
   const pwdRef = useRef();
   const errRef = useRef();
+
+  const { isLoading, errMsg, setErrMsg, handleLogin } = useAuth();
 
   function handleChangeEmail(value) {
     setEmail(value);
@@ -36,46 +28,7 @@ function Login() {
 
   useEffect(() => {
     setErrMsg("");
-  }, [email, pwd]);
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setIsLoading(true);
-    try {
-      const response = await axios.post(
-        LOGIN_URL,
-        JSON.stringify({ email, password: pwd }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        },
-      );
-
-      const token = response?.data?.token;
-      const role = response?.data?.user.role;
-
-      setAuth({ email, pwd, role, token });
-
-      navigate("/dashboard");
-    } catch (err) {
-      if (!err?.response) {
-        setErrMsg("Network or Server Problems");
-      } else if (err.response?.status === 400) {
-        setErrMsg("Missing Email or Password");
-      } else if (err.response?.status === 401) {
-        console.error("Unauthorized");
-      } else if (err.response?.status === 404) {
-        console.log(err.response?.status);
-        setErrMsg("Please Check Your Email or Password !");
-      } else {
-        console.error("Login Failed");
-      }
-      if (errMsg) {
-        errRef.current?.focus();
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  }, [email, pwd, setErrMsg]);
 
   return (
     <section className="grid min-h-screen place-items-center bg-slate-100 py-10">
@@ -98,7 +51,7 @@ function Login() {
                     </h4>
                   </div>
 
-                  <form onSubmit={(e) => handleSubmit(e)}>
+                  <form onSubmit={(e) => handleLogin(e, email, pwd)}>
                     <p className="mb-2 text-center text-xl">
                       Please login to your account
                     </p>

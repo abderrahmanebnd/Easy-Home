@@ -2,6 +2,8 @@ const BASE_URL_BAR_AREA_CHARTS =
   "https://easyhome-lcvx.onrender.com/api/v1/dashboard/";
 //easyhome-lcvx.onrender.com/api/v1/dashboard/applications/monthly
 const BASE_URL_WORKERS = "https://easyhome-lcvx.onrender.com/api/v1/workers/";
+
+
 export async function getDataBarAreaCharts(route, timeType) {
   const url = `${BASE_URL_BAR_AREA_CHARTS}${route}/${timeType}`;
 
