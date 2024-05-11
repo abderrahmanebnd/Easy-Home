@@ -54,9 +54,9 @@ function BarChartAdmin({ route }) {
         )}
       </div>
       <Buttons>
-        <Button onChangeTimeType={handleTimeTypeChange}>daily</Button>
-        <Button onChangeTimeType={handleTimeTypeChange}>monthly</Button>
-        <Button onChangeTimeType={handleTimeTypeChange}>yearly</Button>
+        <Button onClick={()=>handleTimeTypeChange("daily")}color="blue">daily</Button>
+        <Button onClick={()=>handleTimeTypeChange("monthly")}color="blue">monthly</Button>
+        <Button onClick={()=>handleTimeTypeChange("yearly")}color="blue">yearly</Button>
       </Buttons>
     </>
   );

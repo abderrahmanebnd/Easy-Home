@@ -1,5 +1,16 @@
-function Certificats() {
-  return <div>cerificates</div>;
+
+import CertificateList from "../ui/CertificateIdList";
+
+function Certificates() {
+  return (
+    <>
+   <h2 className="mb-10 text-xl  font-semibold text-primaryColor sm:text-3xl">
+        Certificates sent by workers
+  </h2>
+  <CertificateList type="Certificate"/>
+  
+  </>
+    );
 }
 
-export default Certificats;
+export default Certificates;

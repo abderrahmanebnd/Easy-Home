@@ -19,6 +19,7 @@ export function AreaChartAdmin({ route }) {
   } = useDataAreaBarCharts(route, timeType);
   const categories = dataChart ? getChartCategories(dataChart) : [];
   const colors = generateColors(categories.length);
+
   const handleTimeTypeChange = (newTimeType) => {
     setTimeType(newTimeType);
     refetch();
@@ -50,9 +51,9 @@ export function AreaChartAdmin({ route }) {
         )}
       </div>
       <Buttons>
-        <Button onChangeTimeType={handleTimeTypeChange}>daily</Button>
-        <Button onChangeTimeType={handleTimeTypeChange}>monthly</Button>
-        <Button onChangeTimeType={handleTimeTypeChange}>yearly</Button>
+        <Button onClick={() => handleTimeTypeChange("daily")}color="blue">daily</Button>
+        <Button onClick={() => handleTimeTypeChange("monthly")}color="blue">monthly</Button>
+        <Button onClick={() => handleTimeTypeChange("yearly")}color="blue">yearly</Button>
       </Buttons>
     </>
   );
