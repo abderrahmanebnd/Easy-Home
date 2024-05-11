@@ -1,6 +1,10 @@
 import { DonutChart, Legend } from "@tremor/react";
-import { useEffect, useState } from "react";
-import { generateColors, getDonutChartCategories } from "../utils/helpers";
+import { useState } from "react";
+import {
+  generateColors,
+  getDonutChartCategories,
+  validateArray,
+} from "../utils/helpers";
 import { useDataAreaBarCharts } from "../services/useData";
 import Loader from "./Loader";
 import ErrorMessage from "./ErrorMessage";
@@ -14,9 +18,7 @@ function DonutChartAdmin({ type, route }) {
     error,
   } = useDataAreaBarCharts(route, type);
 
-  const categories = dataDonutChart
-    ? getDonutChartCategories(dataDonutChart)
-    : [];
+  const categories = getDonutChartCategories(validateArray(dataDonutChart));
 
   const colors = generateColors(categories.length);
 

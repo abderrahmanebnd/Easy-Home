@@ -2,7 +2,11 @@ import { BarChart } from "@tremor/react";
 import { useState } from "react";
 import Buttons from "./Buttons";
 import Button from "./Button";
-import { generateColors, getChartCategories } from "../utils/helpers";
+import {
+  generateColors,
+  getChartCategories,
+  validateArray,
+} from "../utils/helpers";
 import { IoBarChartOutline } from "react-icons/io5";
 import { useDataAreaBarCharts } from "../services/useData";
 import Loader from "./Loader";
@@ -18,7 +22,7 @@ function BarChartAdmin({ route }) {
     error,
   } = useDataAreaBarCharts(route, timeType);
 
-  const categories = dataChart ? getChartCategories(dataChart) : [];
+  const categories = getChartCategories(validateArray(dataChart));
 
   const colors = generateColors(categories.length);
 
@@ -39,9 +43,10 @@ function BarChartAdmin({ route }) {
         {error && <ErrorMessage />}
         {!error && isLoading && <Loader />}
         {!error && !isLoading && (
+          // <span>hey</span>
           <BarChart
             className="h-52 md:h-64 lg:h-80"
-            data={dataChart}
+            data={validateArray(dataChart)}
             index="date"
             categories={categories}
             colors={colors}

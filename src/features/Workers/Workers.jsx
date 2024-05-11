@@ -67,10 +67,9 @@ function Workers() {
       </div>
 
       <section className=" grid grid-cols-1 gap-4 md:grid-cols-3 ">
-         <DonutChartAdmin type="GeneralDonutChart" route="workers" />
+        <DonutChartAdmin type="GeneralDonutChart" route="workers" />
         <DonutChartAdmin type="job" route="workers" />
         <DonutChartAdmin type="wilaya" route="workers" />
-        
       </section>
       <TableInfo />
     </div>
