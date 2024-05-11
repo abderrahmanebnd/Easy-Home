@@ -1,21 +1,35 @@
 export function getChartCategories(dataArray) {
   const categories = new Set();
-  Object.keys(dataArray.at(0))
-    .slice(1)
-    .forEach((key) => {
-      categories.add(key);
-    });
-
-  return Array.from(categories);
+  if (isArray(dataArray)) {
+    Object.keys(dataArray?.at(0))
+      .slice(1)
+      .forEach((key) => {
+        categories.add(key);
+      });
+    return Array.from(categories);
+  } else {
+    return [];
+  }
 }
 export function getDonutChartCategories(dataArray) {
-  const categories = dataArray.map((dataObj) => dataObj._id);
+  const categories = isArray(dataArray)
+    ? dataArray?.map((dataObj) => dataObj._id)
+    : [];
 
   return categories;
 }
 
 export function generateColors(numColors) {
-  const colors = ["blue-500", "green-500", "orange-500", "violet-500","red-500","yellow-500","cyan-500","pink-500"];
+  const colors = [
+    "blue-500",
+    "green-500",
+    "orange-500",
+    "violet-500",
+    "red-500",
+    "yellow-500",
+    "cyan-500",
+    "pink-500",
+  ];
   const dynamicColors = [];
 
   for (let i = 0; i < numColors; i++) {
@@ -48,4 +62,11 @@ export function getDate() {
   const month = currentDate.toLocaleDateString("en-US", { month: "long" });
   const year = currentDate.getFullYear();
   return { dayOfTheWeek, day, month, year };
+}
+
+export function validateArray(arr) {
+  return isArray(arr) ? arr : [];
+}
+export function isArray(arr) {
+  return Array.isArray(arr) && arr.length > 0;
 }

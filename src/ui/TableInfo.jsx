@@ -10,12 +10,11 @@ import ErrorMessage from "./ErrorMessage";
 function TableInfo() {
   const { workers, isLoading, error } = useWorkers();
   const [value, setValue] = useState("architect");
-
   return (
     <div className="mt-8 hidden sm:block">
       <section className="mb-3 flex items-center gap-3">
         <h3 className="  text-lg text-primaryColor sm:text-2xl">
-         Best Workers By Categories
+          Best Workers By Categories
         </h3>
         <GrUserWorker className="text-lg text-primaryColor sm:text-2xl" />
       </section>
@@ -42,7 +41,7 @@ function TableInfo() {
             <Table>
               <TableHeadInfo />
               <TableBody>
-                {workers.filter(
+                {workers?.filter(
                   (worker) => worker.job.toLowerCase() === value.toLowerCase(),
                 ).length === 0 ? (
                   <TableRow>
@@ -54,7 +53,7 @@ function TableInfo() {
                   </TableRow>
                 ) : (
                   workers
-                    .filter(
+                    ?.filter(
                       (worker) =>
                         worker.job.toLowerCase() === value.toLowerCase(),
                     )

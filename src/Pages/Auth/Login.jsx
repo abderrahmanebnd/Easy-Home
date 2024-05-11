@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
-import CustomInput from "../ui/CustomInput";
-import { useAuth } from "../context/AuthProvider";
+import CustomInput from "../../ui/CustomInput";
+import { useAuth } from "../../context/AuthProvider";
 import { IoIosWarning } from "react-icons/io";
-import Loader from "../ui/Loader";
+import Loader from "../../ui/Loader";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -23,8 +23,10 @@ function Login() {
   }
 
   useEffect(() => {
-    emailRef.current.focus();
-  }, []);
+    if (!isLoading) {
+      emailRef.current.focus();
+    }
+  }, [isLoading]);
 
   useEffect(() => {
     setErrMsg("");
