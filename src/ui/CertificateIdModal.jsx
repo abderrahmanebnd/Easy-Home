@@ -36,7 +36,7 @@ function CertificateIdModal({ setViewDetails, request }) {
 
   return (
     <div className="fixed inset-0  overflow-y-auto  bg-slate-700 bg-opacity-30 py-10 backdrop-blur-sm">
-      <div className="scroll relative mx-auto flex w-3/4 flex-col gap-6 rounded-2xl border-4 border-primaryColor bg-slate-300 px-6 py-8">
+      <div className="scroll relative mx-auto flex w-3/4 flex-col gap-6 rounded-2xl border-4 border-primaryColor bg-white px-6 py-8">
         <button
           onClick={() => setViewDetails(false)}
           className="absolute -right-6 -top-6 flex h-12 w-12 items-center justify-center rounded-full border-4 border-primaryColor bg-white transition-all duration-300 hover:bg-slate-300 hover:scale-110"

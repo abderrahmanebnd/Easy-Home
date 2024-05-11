@@ -14,7 +14,7 @@ function CertificateIdItem({ request, setViewDetails, setRequestModal }) {
     setRequestModal(request);
   }
   return (
-    <li className="flex flex-col items-center gap-5 rounded-2xl border-4 border-primaryColor bg-slate-300 px-6 py-8">
+    <li className="flex flex-col items-center gap-5 rounded-2xl border-4 border-primaryColor bg-white px-6 py-8">
       <section className=" flex w-full  items-center justify-around bg-customGray pt-6 pb-2 border-2 border-primaryColor rounded-2xl">
         <div className="relative">
           <img
@@ -32,7 +32,7 @@ function CertificateIdItem({ request, setViewDetails, setRequestModal }) {
           <p className="text-lg text-slate-400"> {job}</p>
         </div>
       </section>
-      <section className="flex min-w-full flex-col gap-3 rounded-2xl border-2 border-primaryColor p-4 bg-customGray">
+      <section className="flex min-w-full flex-col gap-3 rounded-2xl border-2 border-primaryColor p-4 bg-customGray ">
         <div className="flex items-center gap-2">
           <MdEmail className="text-lg text-primaryColor" />
           <p className=" text-slate-400">{email}</p>
