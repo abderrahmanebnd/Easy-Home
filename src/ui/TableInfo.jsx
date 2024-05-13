@@ -36,13 +36,14 @@ function TableInfo() {
               <option value="plumber">Plumbers</option>
               <option value="electrician">Electiricians</option>
               <option value="carpenter">Carpenters</option>
+              <option value="painter">painters</option>
             </select>
 
             <Table>
               <TableHeadInfo />
               <TableBody>
                 {workers?.filter(
-                  (worker) => worker.job.toLowerCase() === value.toLowerCase(),
+                  (worker) => worker?.job?.toLowerCase() === value.toLowerCase(),
                 ).length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={6}>
@@ -55,7 +56,7 @@ function TableInfo() {
                   workers
                     ?.filter(
                       (worker) =>
-                        worker.job.toLowerCase() === value.toLowerCase(),
+                        worker?.job?.toLowerCase() === value.toLowerCase(),
                     )
                     .sort((a, b) => b.rating - a.rating)
                     .slice(0, 5)

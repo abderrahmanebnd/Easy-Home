@@ -1,4 +1,4 @@
-function Button({ children, onClick, color = "blue" ,disabled}) {
+function Button({ children, onClick, color = "blue",disabled }) {
   return (
     <button
       onClick={onClick}

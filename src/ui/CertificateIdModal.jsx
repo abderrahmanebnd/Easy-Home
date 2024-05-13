@@ -5,13 +5,25 @@ import { MdEmail } from "react-icons/md";
 import Buttons from "./Buttons";
 import Button from "./Button";
 
-import { BsCalendarDateFill } from "react-icons/bs";
+import { BsCalendarDateFill, BsFillMouse3Fill } from "react-icons/bs";
 import { useDecline } from "../services/useDecline";
 import { useAccept } from "../services/useAccept";
+import { useEffect, useState } from "react";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
-function CertificateIdModal({ setViewDetails, request }) {
-  const { title, image } = request.certificate;
-  const { type, _id } = request;
+
+function CertificateIdModal({ setViewDetails, request, type }) {
+  const [image, setImage] = useState("");
+  useEffect(() => {
+    if (type === "Certificate") {
+      setImage(request.certificate.image);
+    }
+    if (type === "IdPicture") {
+      setImage(request.worker.idPicture);
+    }
+  }, []);
+
+  const { type: typeDoc, _id } = request;
   const {
     name,
     email,
@@ -23,27 +35,30 @@ function CertificateIdModal({ setViewDetails, request }) {
     certificates,
     experience,
   } = request.worker;
-  const { isAccepting, acceptingRequest } = useAccept({ type });
-  const { isDeclining, decliningRequest } = useDecline({ type });
+  const { isAccepting, acceptingRequest } = useAccept(typeDoc, {
+    setViewDetails,
+  });
+  const { isDeclining, decliningRequest } = useDecline(typeDoc, {
+    setViewDetails,
+  });
+
   function handleAccept() {
     acceptingRequest(_id);
-    setViewDetails(false);
   }
   function handleDecline() {
     decliningRequest(_id);
-    setViewDetails(false);
   }
 
   return (
     <div className="fixed inset-0  overflow-y-auto  bg-slate-700 bg-opacity-30 py-10 backdrop-blur-sm">
-      <div className="scroll relative mx-auto flex w-3/4 flex-col gap-6 rounded-2xl border-4 border-primaryColor bg-white px-6 py-8">
+      <div className="scroll relative mx-auto flex w-3/4 flex-col gap-6 rounded-2xl border-4 border-primaryColor bg-white px-6 py-8 lg:w-2/3 xl:w-1/2">
         <button
           onClick={() => setViewDetails(false)}
-          className="absolute -right-6 -top-6 flex h-12 w-12 items-center justify-center rounded-full border-4 border-primaryColor bg-white transition-all duration-300 hover:bg-slate-300 hover:scale-110"
+          className="absolute -right-6 -top-6 flex h-12 w-12 items-center justify-center rounded-full border-4 border-primaryColor bg-white transition-all duration-300 hover:scale-110 hover:bg-slate-300"
         >
           <GoX className="text-4xl text-primaryColor" />
         </button>
-        <section className="grid grid-cols-2  items-center justify-items-center gap-3 sm:grid-cols-3 bg-customGray border-2 rounded-2xl border-primaryColor p-6">
+        <section className="grid grid-cols-2  items-center justify-items-center gap-3 rounded-2xl border-2 border-primaryColor bg-customGray p-6 sm:grid-cols-3">
           <div className="relative row-start-1 row-end-3 sm:row-end-2">
             <img
               className="relative h-24 w-24 rounded-full border-4 border-primaryColor drop-shadow-md "
@@ -65,7 +80,7 @@ function CertificateIdModal({ setViewDetails, request }) {
             </p>
           </div>
         </section>
-        <section className=" mx-auto flex w-full flex-col  gap-6 rounded-2xl border-2 border-primaryColor p-6 lg:gap-8 bg-customGray">
+        <section className=" mx-auto flex w-full flex-col  gap-6 rounded-2xl border-2 border-primaryColor bg-customGray p-6 lg:gap-8">
           <div className="grid grid-rows-1 justify-items-center gap-y-3 sm:grid-cols-2 sm:grid-rows-2 lg:gap-y-6 ">
             <div className="flex items-center gap-2">
               <MdEmail className="text-lg text-primaryColor lg:text-2xl" />
@@ -89,22 +104,30 @@ function CertificateIdModal({ setViewDetails, request }) {
 
           <div className="mx-auto w-full">
             <h1 className=" mb-3 text-center text-2xl font-semibold text-primaryColor lg:text-4xl">
-              {type} validation
+              {typeDoc} validation
             </h1>
             <h2 className="mb-1 text-center text-lg text-primaryColor lg:text-2xl">
               Description
             </h2>
-            <p className="mb-2 min-w-full rounded-2xl border-2 border-dotted border-primaryColor p-3 text-primaryColor">
-              {title}
-            </p>
-            <img
-              className=" rounded-2xl border-2 border-primaryColor"
-              src={image}
-              alt="certificate"
-            />
+            <TransformWrapper>
+              <TransformComponent>
+                <img
+                  className=" rounded-2xl border-2 border-primaryColor"
+                  src={image}
+                  alt={type==='Certificate'?"certificate":"id Picture"}
+                />
+              </TransformComponent>
+            </TransformWrapper>
+            <div className="flex items-center justify-center gap-3">
+              <p className="mt-2 text-center text-lg font-semibold text-primaryColor lg:text-xl">
+                {" "}
+                Zoom With The Scroll Wheel
+              </p>
+              <BsFillMouse3Fill className="text-lg text-primaryColor lg:text-xl" />
+            </div>
           </div>
         </section>
-        <section className="mx-auto w-full border-2 rounded-2xl border-primaryColor">
+        <section className="mx-auto w-full rounded-2xl border-2 border-primaryColor">
           <Buttons>
             <Button
               color="emerald"
@@ -112,13 +135,14 @@ function CertificateIdModal({ setViewDetails, request }) {
               disabled={isAccepting}
             >
               Accept
+              
             </Button>
             <Button
               color="red"
               onClick={() => handleDecline()}
               disabled={isDeclining}
             >
-              Decline
+              decline 
             </Button>
           </Buttons>
         </section>

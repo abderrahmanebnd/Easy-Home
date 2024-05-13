@@ -6,6 +6,7 @@ import Button from "./Button";
 
 
 function CertificateIdItem({ request, setViewDetails, setRequestModal }) {
+  const {type}=request
   const { name, email, phoneNumber, job, profilePicture, rating } =
     request.worker;
 
@@ -32,7 +33,7 @@ function CertificateIdItem({ request, setViewDetails, setRequestModal }) {
           <p className="text-lg text-slate-400"> {job}</p>
         </div>
       </section>
-      <section className="flex min-w-full flex-col gap-3 rounded-2xl border-2 border-primaryColor p-4 bg-customGray ">
+      <section className="flex min-w-full flex-col gap-3 rounded-2xl border-2 border-primaryColor p-4 bg-customGray items-center">
         <div className="flex items-center gap-2">
           <MdEmail className="text-lg text-primaryColor" />
           <p className=" text-slate-400">{email}</p>
@@ -43,7 +44,7 @@ function CertificateIdItem({ request, setViewDetails, setRequestModal }) {
         </div>
       </section>
       <Button color="cyan" onClick={() => handleToggle()}>
-        view Certificate
+        view {type==="IdPicture"?`identity card`:`Certificate`}
       </Button>
     </li>
   );

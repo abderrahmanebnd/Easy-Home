@@ -1,13 +1,13 @@
 
-import CertificateList from "../ui/CertificateIdList";
+import CertificateIdList from "../ui/CertificateIdList";
 
 function Certificates() {
   return (
     <>
    <h2 className="mb-10 text-xl  font-semibold text-primaryColor sm:text-3xl">
-        Certificates sent by workers
+        Verification : Certificates
   </h2>
-  <CertificateList type="Certificate"/>
+  <CertificateIdList type="Certificate"/>
   
   </>
     );
