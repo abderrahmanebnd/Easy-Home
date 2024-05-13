@@ -26,13 +26,15 @@ export async function getRequestByType(type) {
 export async function acceptRequest(id) {
   const urlId = `${BASE_URL}${id}/approveRequest`;
   try {
-     await axios.patch(urlId,null, {
+     const response = await fetch(urlId, {
+      method:"PATCH",
       
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
+    if(!response.ok) throw new Error()
     
   } catch (err) {
     console.error("Failed Accepting Request", err);
@@ -42,12 +44,14 @@ export async function acceptRequest(id) {
 export async function declineRequest(id) {
   const urlId = `${BASE_URL}${id}/disapproveRequest`;
   try {
-    await axios.patch(urlId, null, {
+    const response=await fetch(urlId, {
+      method:"PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
+ if(!response.ok) throw new Error();
   } catch (err) {
     console.error("Failed declining Request", err);
   }
