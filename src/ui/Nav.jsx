@@ -1,4 +1,4 @@
-import { HiOutlineHome, HiOutlineUsers } from "react-icons/hi2";
+import { HiOutlineHome, HiOutlineIdentification, HiOutlineUsers } from "react-icons/hi2";
 import { TbMessageReport, TbCertificate } from "react-icons/tb";
 import { GrUserWorker } from "react-icons/gr";
 import { MdHomeRepairService, MdOutlinePunchClock } from "react-icons/md";
@@ -100,19 +100,6 @@ function Nav() {
               </span>
             </NavLink>
           </li>
-          {/* <li>
-            <NavLink
-              to="dashboard/reports"
-              className=" flex w-48 items-center  gap-6 
-          rounded-md   px-2 py-2 tracking-wide hover:bg-slate-100  xl:w-56 xl:pl-4  "
-            >
-              <TbMessageReport className="text-xl text-gray-400  xl:text-3xl" />
-
-              <span className=" font-semibold text-primaryColor xl:text-xl ">
-                Reports
-              </span>
-            </NavLink>
-          </li> */}
           <li>
             <NavLink
               to="dashboard/posts"
@@ -143,14 +130,14 @@ function Nav() {
       </li>
       <li>
         <NavLink
-          to="/reports"
+          to="/idCard"
           className=" flex w-48 items-center  gap-6 
           rounded-md   px-2 py-2 tracking-wide hover:bg-slate-100  xl:w-56 xl:pl-4  "
         >
-          <TbMessageReport className="text-xl text-gray-400  xl:text-3xl" />
+          <HiOutlineIdentification className="text-xl text-gray-400  xl:text-3xl" />
 
           <span className=" font-semibold text-primaryColor xl:text-xl ">
-            Reports
+            ID Card
           </span>
         </NavLink>
       </li>

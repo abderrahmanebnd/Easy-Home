@@ -2,7 +2,8 @@ import { validateArray } from "../utils/helpers";
 import axios from "./axios/axios";
 
 const BASE_URL_WORKERS = "/workers/";
-
+const authentication = JSON.parse(localStorage.getItem("auth"));
+const token = authentication.token;
 export async function getDataBarAreaCharts(route, timeType) {
   const url = `/dashboard/${route}/${timeType}`;
 
@@ -11,7 +12,7 @@ export async function getDataBarAreaCharts(route, timeType) {
       headers: {
         "Content-Type": "application/json",
 
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzdkMTc4N2IyNzZlNjYwMjY5YjcxMSIsImN1cnJlbnRSb2xlIjoiVXNlciIsImlhdCI6MTcxNDkzNDM4OCwiZXhwIjoxNzIyNzEwMzg4fQ.71mUxPXlvF2nZZsI458g6ThNmDhZjn7zpAXUNM7LITQ`,
+        Authorization: `Bearer ${token}`,
       },
     });
     return response.data.data;
