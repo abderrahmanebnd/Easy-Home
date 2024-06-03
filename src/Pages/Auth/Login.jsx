@@ -132,11 +132,24 @@ function Login() {
                     <h4 className="mb-6  text-xl font-semibold capitalize md:text-2xl">
                       We are more than just a company
                     </h4>
-                    <p className="text-xs leading-5 md:text-sm">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    <p className="text-xs leading-5 md:text-sm mb-2">
+                      At Easy Home, we understand the value of convenience,
+                      reliability, and quality when it comes to in-home
+                      services. Whether you're seeking assistance with household
+                      chores, repairs, or specialized tasks, Easy Home is your
+                      one-stop destination for connecting with trusted
+                      professionals who deliver exceptional service right to
+                      your doorstep. 
+                      </p>
+
+                      <p className="text-xs leading-5 md:text-sm">
+                      Our platform is designed to simplify your
+                      life by providing seamless access to a wide range of
+                      skilled service providers, all vetted for their expertise,
+                      professionalism, and reliability. From cleaning and
+                      maintenance to plumbing, electrical work, and more, Easy
+                      Home offers a diverse array of services to meet your every
+                      need.
                     </p>
                   </div>
                 </div>
