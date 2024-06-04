@@ -11,7 +11,6 @@ import { useAccept } from "../services/useAccept";
 import { useEffect, useState } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
-
 function CertificateIdModal({ setViewDetails, request, type }) {
   const [image, setImage] = useState("");
   useEffect(() => {
@@ -109,15 +108,17 @@ function CertificateIdModal({ setViewDetails, request, type }) {
             <h2 className="mb-1 text-center text-lg text-primaryColor lg:text-2xl">
               Description
             </h2>
-            <TransformWrapper>
-              <TransformComponent>
-                <img
-                  className=" rounded-2xl border-2 border-primaryColor"
-                  src={image}
-                  alt={type==='Certificate'?"certificate":"id Picture"}
-                />
-              </TransformComponent>
-            </TransformWrapper>
+            <div className="flex items-center justify-center">
+              <TransformWrapper>
+                <TransformComponent>
+                  <img
+                    className=" rounded-2xl border-2 border-primaryColor"
+                    src={image}
+                    alt={type === "Certificate" ? "certificate" : "id Picture"}
+                  />
+                </TransformComponent>
+              </TransformWrapper>
+            </div>
             <div className="flex items-center justify-center gap-3">
               <p className="mt-2 text-center text-lg font-semibold text-primaryColor lg:text-xl">
                 {" "}
@@ -135,14 +136,13 @@ function CertificateIdModal({ setViewDetails, request, type }) {
               disabled={isAccepting}
             >
               Accept
-              
             </Button>
             <Button
               color="red"
               onClick={() => handleDecline()}
               disabled={isDeclining}
             >
-              decline 
+              decline
             </Button>
           </Buttons>
         </section>
