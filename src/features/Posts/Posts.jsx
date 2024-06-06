@@ -1,10 +1,9 @@
-
 import { AreaChartAdmin } from "../../ui/AreaChartAdmin";
 import Statistic from "../../ui/Statistic";
 import Statistics from "../../ui/Statistics";
-import {MdPostAdd } from "react-icons/md";
+import { MdPostAdd } from "react-icons/md";
 import { LuUsers2 } from "react-icons/lu";
-import { TbChartDonut} from "react-icons/tb";
+import { TbChartDonut } from "react-icons/tb";
 import DonutChartAdmin from "../../ui/DonutChartAdmin";
 import { useDataAreaBarCharts } from "../../services/useData";
 import Loader from "../../ui/Loader";
@@ -49,7 +48,7 @@ function Posts() {
 
       <AreaChartAdmin route={"posts"} />
 
-      <div className="mb-3 flex items-center gap-3 mt-8">
+      <div className="mb-3 mt-8 flex items-center gap-3">
         <h3 className="  text-lg text-primaryColor sm:text-2xl">
           Workflow Summary
         </h3>
@@ -57,8 +56,12 @@ function Posts() {
       </div>
 
       <section className=" grid grid-cols-1 gap-4 md:grid-cols-2">
-        <DonutChartAdmin type="GeneralDonutChart" route="posts" />
-        <DonutChartAdmin type="job" route="posts" />
+        <DonutChartAdmin type="GeneralDonutChart" route="posts">
+          Post Actions
+        </DonutChartAdmin>
+        <DonutChartAdmin type="job" route="posts">
+          Posts Applied by job categories
+        </DonutChartAdmin>
       </section>
     </div>
   );

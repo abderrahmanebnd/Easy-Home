@@ -59,7 +59,7 @@ function Workers() {
 
       <AreaChartAdmin route="workers" />
 
-      <div className="mb-1 flex items-center gap-3 mt-8">
+      <div className="mb-1 mt-8 flex items-center gap-3">
         <h3 className="  text-lg text-primaryColor sm:text-2xl">
           Workflow Summary
         </h3>
@@ -67,9 +67,15 @@ function Workers() {
       </div>
 
       <section className=" grid grid-cols-1 gap-4 md:grid-cols-3 ">
-        <DonutChartAdmin type="GeneralDonutChart" route="workers" />
-        <DonutChartAdmin type="job" route="workers" />
-        <DonutChartAdmin type="wilaya" route="workers" />
+        <DonutChartAdmin type="GeneralDonutChart" route="workers">
+          Worker Actions
+        </DonutChartAdmin>
+        <DonutChartAdmin type="job" route="workers">
+          Worker Per Category
+        </DonutChartAdmin>
+        <DonutChartAdmin type="wilaya" route="workers">
+          Workers Per Wilaya
+        </DonutChartAdmin>
       </section>
       <TableInfo />
     </div>

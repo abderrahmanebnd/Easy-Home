@@ -32,11 +32,15 @@ function TableInfo() {
               <option value="architect">Architects</option>
               <option value="mason">Masons</option>
               <option value="cleaner">Cleaners</option>
-              <option value="designer">Designers</option>
+              <option value="interior designer">Interior Designers</option>
               <option value="plumber">Plumbers</option>
               <option value="electrician">Electiricians</option>
               <option value="carpenter">Carpenters</option>
               <option value="painter">painters</option>
+              <option value="security system installer">Security System Installer</option>
+              <option value="landscaper">Landscaper</option>
+              
+              
             </select>
 
             <Table>

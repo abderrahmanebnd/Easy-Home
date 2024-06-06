@@ -3,7 +3,7 @@ import { TableCell, TableRow } from "@tremor/react";
 import { TbCertificate, TbCertificateOff } from "react-icons/tb";
 
 function TableRowInfo({ worker }) {
-  const { name, phoneNumber, wilaya, email, isCertified,rating } = worker;
+  const { name, phoneNumber, wilaya, email, isCertified, rating } = worker;
 
   return (
     <TableRow>
@@ -12,7 +12,7 @@ function TableRowInfo({ worker }) {
       <TableCell>{phoneNumber}</TableCell>
       <TableCell>{wilaya}</TableCell>
       <TableCell>{email}</TableCell>
-      <TableCell className="text-center">{rating}⭐</TableCell>
+      <TableCell className="text-center">{Math.round(rating)}⭐</TableCell>
       <TableCell className="flex justify-center">
         {isCertified ? (
           <TbCertificate className="text-xl" />

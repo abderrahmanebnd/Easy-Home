@@ -59,14 +59,16 @@ function Deals() {
 
       <BarChartAdmin route="deals" />
 
-      <div className="mb-3 flex items-center gap-3 mt-8">
+      <div className="mb-3 mt-8 flex items-center gap-3">
         <h3 className="  text-lg text-primaryColor sm:text-2xl">
           Workflow Summary
         </h3>
         <TbChartDonut className="text-lg text-primaryColor sm:text-2xl" />
       </div>
 
-      <DonutChartAdmin type="GeneralDonutChart" route="deals" />
+      <DonutChartAdmin type="GeneralDonutChart" route="deals">
+        Deal Actions
+      </DonutChartAdmin>
     </div>
   );
 }

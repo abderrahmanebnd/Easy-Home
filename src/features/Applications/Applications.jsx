@@ -52,18 +52,19 @@ function Applications() {
 
       <BarChartAdmin route="applications" />
 
-      <div className="mb-3 flex items-center gap-3 mt-8">
+      <div className="mb-3 mt-8 flex items-center gap-3">
         <h3 className="  text-lg text-primaryColor sm:text-2xl">
           Workflow Summary
         </h3>
         <TbChartDonut className="text-lg text-primaryColor sm:text-2xl" />
       </div>
       <section className=" grid grid-cols-1 gap-4 md:grid-cols-2">
-        <DonutChartAdmin type="GeneralDonutChart" route="applications" />
-        <DonutChartAdmin
-          type="applicationPerJobCategory"
-          route="applications"
-        />
+        <DonutChartAdmin type="GeneralDonutChart" route="applications">
+          Application Actions
+        </DonutChartAdmin>
+        <DonutChartAdmin type="applicationPerJobCategory" route="applications">
+          Applications Per Job Categories
+        </DonutChartAdmin>
       </section>
     </div>
   );

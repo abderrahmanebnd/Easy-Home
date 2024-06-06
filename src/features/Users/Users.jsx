@@ -58,7 +58,7 @@ function User() {
 
       <BarChartAdmin route="users" />
 
-      <div className="mb-1 flex items-center gap-3 mt-8">
+      <div className="mb-1 mt-8 flex items-center gap-3">
         <h3 className="  text-lg text-primaryColor sm:text-2xl">
           Workflow Summary
         </h3>
@@ -66,8 +66,12 @@ function User() {
       </div>
 
       <section className=" grid grid-cols-1 gap-4 md:grid-cols-2">
-        <DonutChartAdmin type="GeneralDonutChart" route="users" />
-        <DonutChartAdmin type="wilaya" route="users" />
+        <DonutChartAdmin type="GeneralDonutChart" route="users">
+          User Actions
+        </DonutChartAdmin>
+        <DonutChartAdmin type="wilaya" route="users">
+          Users Per Wilaya
+        </DonutChartAdmin>
       </section>
     </div>
   );

@@ -64,8 +64,8 @@ function CertificateIdModal({ setViewDetails, request, type }) {
               src={profilePicture}
               alt="worker profile"
             />
-            <span className="absolute -top-4 left-14 rounded-full border-4 border-primaryColor bg-white px-1 py-2 text-sm font-semibold  text-primaryColor">
-              {rating}
+            <span className="absolute -top-4 left-14 flex h-12 w-12 items-center justify-center rounded-full border-4 border-primaryColor  bg-white px-1 py-2 text-sm font-semibold text-primaryColor">
+              {Math.round(rating)}
               <span className="text-sm">⭐</span>
             </span>
           </div>

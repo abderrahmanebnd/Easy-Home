@@ -9,7 +9,7 @@ import { useDataAreaBarCharts } from "../services/useData";
 import Loader from "./Loader";
 import ErrorMessage from "./ErrorMessage";
 
-function DonutChartAdmin({ type, route }) {
+function DonutChartAdmin({ type, route,children }) {
   const [value, setvalue] = useState(null);
 
   const {
@@ -24,6 +24,7 @@ function DonutChartAdmin({ type, route }) {
 
   return (
     <div className=" flex flex-col items-center justify-center  gap-y-3  rounded-2xl bg-customGray p-4  md:py-6  lg:px-6">
+      <p className="text-primaryColor mb-2 text-xl lg:text-2xl">{children}</p>
       {error && <ErrorMessage />}
       {!error && isLoading && <Loader />}
       {!error && !isLoading && (

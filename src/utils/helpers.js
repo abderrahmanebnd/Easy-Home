@@ -25,10 +25,11 @@ export function generateColors(numColors) {
     "green-500",
     "orange-500",
     "violet-500",
-    "red-500",
+    "red-600",
     "yellow-500",
     "cyan-500",
     "pink-500",
+    "rose-500",
   ];
   const dynamicColors = [];
 

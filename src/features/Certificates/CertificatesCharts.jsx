@@ -1,12 +1,15 @@
-
 import BarChartAdmin from "../../ui/BarChartAdmin";
 
 import DonutChartAdmin from "../../ui/DonutChartAdmin";
 import Statistic from "../../ui/Statistic";
 import Statistics from "../../ui/Statistics";
 
-
-import { TbCertificate, TbCertificate2, TbCertificate2Off, TbChartDonut} from "react-icons/tb";
+import {
+  TbCertificate,
+  TbCertificate2,
+  TbCertificate2Off,
+  TbChartDonut,
+} from "react-icons/tb";
 import { useDataAreaBarCharts } from "../../services/useData";
 import ErrorMessage from "../../ui/ErrorMessage";
 import Loader from "../../ui/Loader";
@@ -65,15 +68,16 @@ function CertificatesCharts() {
 
       <BarChartAdmin route="certificates" />
 
-      <div className="mb-3 flex items-center gap-3 mt-8">
+      <div className="mb-3 mt-8 flex items-center gap-3">
         <h3 className="  text-lg text-primaryColor sm:text-2xl">
           Workflow Summary
         </h3>
         <TbChartDonut className="text-lg text-primaryColor sm:text-2xl" />
       </div>
-      
-        <DonutChartAdmin type="GeneralDonutChart" route="certificates" />
-      
+
+      <DonutChartAdmin type="GeneralDonutChart" route="certificates">
+        Certificate Actions
+      </DonutChartAdmin>
     </div>
   );
 }

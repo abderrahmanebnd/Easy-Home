@@ -49,7 +49,7 @@ function Reviews() {
 
       <AreaChartAdmin route={"reviews"} />
 
-      <div className="mb-3 flex items-center gap-3 mt-8">
+      <div className="mb-3 mt-8 flex items-center gap-3">
         <h3 className="  text-lg text-primaryColor sm:text-2xl">
           Workflow Summary
         </h3>
@@ -57,8 +57,12 @@ function Reviews() {
       </div>
 
       <section className=" grid grid-cols-1 gap-4 md:grid-cols-2">
-        <DonutChartAdmin type="GeneralDonutChart" route="reviews" />
-        <DonutChartAdmin type="rating" route="reviews" />
+        <DonutChartAdmin type="GeneralDonutChart" route="reviews">
+          Review Actions
+        </DonutChartAdmin>
+        <DonutChartAdmin type="rating" route="reviews">
+          Workers Rating ⭐
+        </DonutChartAdmin>
       </section>
     </div>
   );
